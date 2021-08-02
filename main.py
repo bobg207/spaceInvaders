@@ -19,11 +19,11 @@ enemy_sprites = pg.sprite.Group()
 for row in range(len(LAYOUT)):
     for col in range(len(LAYOUT[row])):
         if LAYOUT[row][col] == '1':
-            enemy = sprites.Enemy(screen, GREEN, 30, 20, 100 + col * 35, 50 + row * 25)
+            enemy = sprites.Enemy(GREEN, 40, 30, col * 50, 50 + row * 40)
             all_sprites.add(enemy)
             enemy_sprites.add(enemy)
         elif LAYOUT[row][col] == '3':
-            player = sprites.Player(screen, YELLOW, 30, 30, WIDTH // 2, HEIGHT - 50)
+            player = sprites.Player(YELLOW, 30, 30, WIDTH // 2, HEIGHT - 50)
             all_sprites.add(player)
 
 
@@ -40,10 +40,12 @@ while playing:
         elif event.type == pg.KEYUP:
             player.velo = 0
 
-    player.update()
     all_sprites.update()
 
     screen.fill(BLACK)
+
+    enemy_sprites.draw(screen)
+    player.draw(screen)
 
     pg.display.flip()
 
